@@ -11,6 +11,8 @@ gem 'jwt'
 gem 'jbuilder', '~> 2.5'
 gem 'rack-cors'
 
+gem "figaro" # handle environment variables
+
 group :development, :test do
   gem 'hirb'
   gem 'pry-rails'

@@ -4,8 +4,8 @@ default: &default
   encoding: unicode
   host: localhost
   timeout: 5000
-  username: rvvergara
-  password: password
+  username: <%= ENV['ddbb_username'] %>
+  password: <%= ENV['ddbb_password'] %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
