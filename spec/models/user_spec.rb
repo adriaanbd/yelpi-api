@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { FactoryBot.build(:user) }
-  let(:saved_user) { FactoryBot.create(:user) }
+  let(:user) { build(:user) }
+  let(:saved_user) { create(:user) }
 
   describe 'CRUD operations at unit level' do 
     context 'happy path' do
