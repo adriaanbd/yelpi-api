@@ -18,12 +18,12 @@ RSpec.describe User, type: :model do
 
     context 'validations' do
       it 'is not valid without name' do
-        user.name = nil;
+        user.given_name = nil;
         expect(user).to_not be_valid
       end
 
-      it 'is not valid without surname' do
-        user.surname = nil;
+      it 'is not valid without last_name' do
+        user.last_name = nil;
         expect(user).to_not be_valid
       end
 
@@ -46,15 +46,15 @@ RSpec.describe User, type: :model do
     context 'update' do
 
       before do 
-        saved_user.name = 'john'
-        saved_user.surname = 'doe'
+        saved_user.given_name = 'john'
+        saved_user.last_name = 'doe'
         saved_user.email = 'johndoe@example.com'
         saved_user.password = 'test012'
         saved_user.save!
       end
 
       it 'updates name' do
-        name = saved_user.name + ' ' + saved_user.surname
+        name = saved_user.given_name + ' ' + saved_user.last_name
         expect(name).to eq('john doe')
       end
 
