@@ -11,7 +11,6 @@ gem 'jwt'
 gem 'jbuilder', '~> 2.5'
 gem 'rack-cors'
 
-gem "figaro" # handle environment variables
 
 group :development, :test do
   gem 'hirb'
@@ -20,6 +19,7 @@ group :development, :test do
   gem 'faker'
   gem 'factory_bot_rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem "figaro" # handle environment variables
 end
 
 group :development do
