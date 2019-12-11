@@ -27,6 +27,12 @@ class V1::UsersController < ApplicationController
   end
 
   def destroy
+    user = find_user
+    return unless user
+
+    authorize user
+    user.destroy
+    action_success('Account deleted')
   end
 
   private
