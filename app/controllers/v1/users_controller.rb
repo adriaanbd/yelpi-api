@@ -2,6 +2,10 @@ class V1::UsersController < ApplicationController
   before_action :pundit_user, except: [:create]
 
   def show
+    user = find_user
+    return unless user
+
+    render json: {user: user.attributes}
   end
   
   def create
