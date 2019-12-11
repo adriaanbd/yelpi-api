@@ -7,4 +7,6 @@ class User < ApplicationRecord
   validates :given_name, presence: true
   validates :last_name, presence: true
   validates_confirmation_of :password
+
+  has_one_attached :profile_pic
 end
