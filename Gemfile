@@ -9,6 +9,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
 gem 'jwt'
 gem 'jbuilder', '~> 2.5'
+gem 'pundit'
 gem 'rack-cors'
 
 
