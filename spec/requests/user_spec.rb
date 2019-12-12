@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe V1::UsersController, :type => :request do
+  let(:tommy) { create(:user, email: 'tom@gmail.com') }
   # To be transferred later on in the specs/support directory
   def user_params(attributes_hash)
     { user: attributes_hash }
@@ -54,6 +55,14 @@ RSpec.describe V1::UsersController, :type => :request do
           expect(response).to have_http_status(422)
           expect(json_response['message']).to match('Cannot create user')
           expect(json_response['errors']['given_name']).to include("can't be blank")
+        end
+      end
+
+      context 'duplicate email' do
+        it 'does not create user' do
+          create_user(valid_user_attributes.merge(email: tommy.email))
+          expect(response).to have_http_status(422)
+          expect(json_response['errors']['email']).to include('has already been taken')
         end
       end
     end
