@@ -23,7 +23,7 @@ class ApplicationController < ActionController::API
   end
 
   def find_user
-    user = User.find_by(username: params[:user_username])
+    user = User.find_by(id: params[:id])
     return user if user
 
     find_error('user')
