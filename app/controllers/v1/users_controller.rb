@@ -12,9 +12,9 @@ class V1::UsersController < ApplicationController
     user = User.new(user_params)
     if user.save
       token = generate_token(user.id)
-      render json: {user: user.attributes, token: token }
+      render json: {user: user.attributes, token: token }, status: 201
     else
-      render json: { errors: user.errors, status: 422 }
+      render json: { message: 'Cannot create user', errors: user.errors }, status: 422
     end
   end
 
