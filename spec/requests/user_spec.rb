@@ -1,80 +1,61 @@
 require 'rails_helper'
 
 RSpec.describe V1::UsersController, :type => :request do
-  let(:user) { attributes_for(:user) }
-  let(:db_user) { create(:user) }
-
-  describe 'GET - Show User' do
-    skip
-    context 'when the user exists' do 
-      it 'returns the user' do 
-      end 
-
-      it 'returns a success response' do
-      end
-    end
-
-    context 'when the user does not exist' do 
-      it 'does not returns a user' do 
-      end 
-
-      it 'returns a response of no success' do 
-      end
-    end
+  # To be transferred later on in the specs/support directory
+  def user_params(attributes_hash)
+    { user: attributes_hash }
   end
 
+  def create_user(attributes)
+    post user_route,
+      params: user_params(attributes)
+  end
 
-  describe 'POST - Create User' do 
+  def valid_user_attributes
+    attributes_for(:user)
+  end
 
-    context 'with valid params' do
-      it 'creates user' do 
-        expect {
-          post '/v1/users', :params => { user: user }.to 
-          change(User, :count).by(1)
-        }
-      end
+  def invalid_user_attributes
+    attributes_for(:user, given_name: nil)
+  end
 
-      it 'returns a success response' do 
-        expect {
-          post '/v1/users', :params => { user: user }.to 
-          be_succesful
-        }
-      end
+  def user_route(username = nil)
+    "/v1/users/#{username}"
+  end
 
-      it 'returns the user' do
-        post '/v1/users', :params => { user: user }
-        returned_user = JSON.parse(response.body)['user']
-        expect(returned_user['email']).to eq(user[:email])
+  def json_response
+    JSON.parse(response.body)
+  end
+
+  def user_token
+    JSON.parse(response.body)['token']
+  end
+  # End of methods to be transferred to support directory
+
+  # Spec for creating user
+  describe 'POST /v1/users' do
+    context 'valid params' do
+      it 'creates and logs in a user' do
+        expect { create_user(valid_user_attributes) }
+          .to change(User, :count).by(1)
+
+        expect(response).to have_http_status(201)
+        
+        expect(json_response['token']).to eq(user_token)
       end
     end
 
-    context 'with invalid params' do
+    context 'invalid params' do
+      context 'missing given_name' do
+        it 'does not create user' do
+          expect { create_user(invalid_user_attributes)}
+            .to_not change(User, :count)
 
-      before(:each) do 
-        user[:given_name] = nil
-      end
-
-      it 'does not create a user' do
-        expect {
-          post '/v1/users', :params => { user: user }.to_not 
-          change(User, :count)
-        }
-      end
-
-      it 'returns a not succesful response' do
-        expect {
-          post '/v1/users', :params => { user: user }.to_not 
-          be_succesful
-        }
+          expect(response).to have_http_status(422)
+          expect(json_response['message']).to match('Cannot create user')
+          expect(json_response['errors']['given_name']).to include("can't be blank")
+        end
       end
     end
-  end
-
-  describe 'PATCH update' do
-    skip
-  end
-
-  describe 'DELETE destroy' do
-    skip
   end
 end
