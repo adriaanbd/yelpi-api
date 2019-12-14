@@ -8,5 +8,5 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates_confirmation_of :password
 
-  has_many :patients, foreign_key: :registrant_id
+  has_many :patients, foreign_key: :registrant_id, dependent: :destroy
 end
