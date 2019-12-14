@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2019_12_14_010825) do
     t.string "last_name", null: false
     t.date "birthdate", null: false
     t.string "gender", null: false
+    t.string "profile_pic", default: "", null: false
     t.string "relationship", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -6,6 +6,7 @@ class CreatePatients < ActiveRecord::Migration[5.2]
       t.string :last_name, null: false
       t.date :birthdate, null: false
       t.string :gender, null: false
+      t.string :profile_pic, null: false, default: ''
       t.string :relationship, null: false
 
       t.timestamps
