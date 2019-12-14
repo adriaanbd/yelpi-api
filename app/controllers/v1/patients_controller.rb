@@ -19,7 +19,7 @@ class V1::PatientsController < ApplicationController
     end
   end
 
-  def upate
+  def update
   end
 
   def destroy
