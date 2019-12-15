@@ -2,6 +2,7 @@ class V1::PatientsController < ApplicationController
   before_action :pundit_user
   
   def index
+    patients = pundit_user.patients
   end
 
   def show
@@ -24,10 +25,10 @@ class V1::PatientsController < ApplicationController
   end
 
   def update
-    patient = find_patient
+    patient = find_patient 
     return unless patient
 
-    if patient.require(:patient).update(update_params)
+    if patient.update(update_params)
       render json: { patient: patient.attributes }, status: :accepted 
     else 
       render json: { message: 'Cannot update patient' }
@@ -46,15 +47,14 @@ class V1::PatientsController < ApplicationController
   private
 
   def patient_params
-    params
-      .permit(
-        :given_name,
-        :last_name,
-        :birthdate,
-        :gender,
-        :profile_pic,
-        :relationship
-      )
+    params.require(:patient).permit(
+      :given_name,
+      :last_name,
+      :birthdate,
+      :gender,
+      :profile_pic,
+      :relationship
+    )
   end
 
   def find_patient
@@ -64,7 +64,7 @@ class V1::PatientsController < ApplicationController
   end
   
   def update_params
-    params.permit(
+    params.require(:patient).permit(
       :given_name,
       :last_name,
       :birthdate,
