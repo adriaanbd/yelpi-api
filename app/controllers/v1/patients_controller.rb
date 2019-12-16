@@ -3,6 +3,8 @@ class V1::PatientsController < ApplicationController
   
   def index
     patients = pundit_user.patients
+
+    render :patient, locals: { patients: patients }, status: 200
   end
 
   def show
