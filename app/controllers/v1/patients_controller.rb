@@ -3,15 +3,13 @@ class V1::PatientsController < ApplicationController
   
   def index
     patients = pundit_user.patients
-
-    render :patient, locals: { patients: patients }, status: 200
+    render :patients, locals: { patients: patients }, status: 200
   end
 
   def show
     patient = find_patient
     return unless patient
-    render json: {patient: patient.attributes.merge(
-      profile_pic: rails_blob_path(patient.profile_pic, only_path: true))}
+    render :patient, locals: { patient: patient }, status: 200
   end
 
   def create
@@ -31,7 +29,7 @@ class V1::PatientsController < ApplicationController
     if patient.update(update_params)
       render json: { patient: patient.attributes }, status: :accepted 
     else 
-      render json: { message: 'Cannot update patient' }
+      process_error(patient, 'Cannot update patient')
     end
   end
 
@@ -40,7 +38,7 @@ class V1::PatientsController < ApplicationController
     if patient&.destroy
       render json: { status: :accepted, message: 'Deleted the patient', patient: patient.attributes }
     else
-      render json: { message: 'Could not delete patient' }
+      process_error(patient, 'Cannot delete patient')
     end
   end
 
