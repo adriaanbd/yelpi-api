@@ -16,11 +16,9 @@ class V1::PatientsController < ApplicationController
     patient = pundit_user.patients.build(patient_params)
 
     if patient.save
-      render json: { 
-        patient: patient.attributes.merge(profile_pic: rails_blob_path(patient.profile_pic, only_path: true))
-      }, status: :created
+      render :patient, locals: { patient: patient }, status: :created
     else
-      render json: { message: 'Cannot create patient', errors: patient.errors }
+      process_error(patient, 'Cannot create patient')
     end
   end
 
