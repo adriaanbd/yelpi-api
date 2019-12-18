@@ -58,7 +58,8 @@ class V1::PatientsController < ApplicationController
   def find_patient
     patient = pundit_user.patients.find_by(id: params[:id])
     return patient if patient
-    render json: { error: "Can\'t find patient" }
+    find_error(patient)
+    nil
   end
   
   def update_params
