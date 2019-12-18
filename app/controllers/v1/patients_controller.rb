@@ -9,6 +9,8 @@ class V1::PatientsController < ApplicationController
   def show
     patient = find_patient
     return unless patient
+    
+    authorize patient
     render :patient, locals: { patient: patient }, status: 200
   end
 
@@ -26,6 +28,7 @@ class V1::PatientsController < ApplicationController
     patient = find_patient 
     return unless patient
 
+    authorize patient
     if patient.update(update_params)
       render json: { patient: patient.attributes }, status: :accepted 
     else 
