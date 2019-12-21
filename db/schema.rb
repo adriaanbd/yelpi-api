@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_14_010825) do
+ActiveRecord::Schema.define(version: 2019_12_21_002903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -64,6 +64,21 @@ ActiveRecord::Schema.define(version: 2019_12_14_010825) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "vitals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "patient_id", null: false
+    t.float "weight", default: 0.0, null: false
+    t.float "systolic", default: 0.0, null: false
+    t.float "diastolic", default: 0.0, null: false
+    t.float "temperature", default: 0.0, null: false
+    t.integer "mental_condition", default: 0, null: false
+    t.integer "physical_health", default: 0, null: false
+    t.integer "locomotive", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_vitals_on_patient_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "patients", "users", column: "registrant_id"
+  add_foreign_key "vitals", "patients"
 end
