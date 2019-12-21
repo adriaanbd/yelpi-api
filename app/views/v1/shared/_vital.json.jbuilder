@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.patient_id vital.patient_id
 json.weight vital.weight
 json.systolic vital.systolic
