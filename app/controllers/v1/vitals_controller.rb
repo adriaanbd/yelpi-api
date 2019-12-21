@@ -1,5 +1,5 @@
 class V1::VitalsController < ApplicationController
-  before_action :pundit_action
+  before_action :pundit_user
   
   def index
   end
@@ -45,8 +45,7 @@ class V1::VitalsController < ApplicationController
   def find_patient
     patient = pundit_user.patients.find_by(id: params[:patient_id])
     return patient if patient
-
-    find_error(patient)
+    find_error('patient')
     nil
   end
 end
