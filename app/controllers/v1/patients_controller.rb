@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class V1::PatientsController < ApplicationController
   before_action :pundit_user
-  
+
   def index
     patients = pundit_user.patients
     render :patients, locals: { patients: patients }, status: 200
@@ -9,7 +11,7 @@ class V1::PatientsController < ApplicationController
   def show
     patient = find_patient
     return unless patient
-    
+
     authorize patient
     render :patient, locals: { patient: patient }, status: 200
   end
@@ -25,13 +27,13 @@ class V1::PatientsController < ApplicationController
   end
 
   def update
-    patient = find_patient 
+    patient = find_patient
     return unless patient
 
     authorize patient
     if patient.update(update_params)
-      render json: { patient: patient.attributes }, status: :accepted 
-    else 
+      render json: { patient: patient.attributes }, status: :accepted
+    else
       process_error(patient, 'Cannot update patient')
     end
   end
@@ -61,10 +63,11 @@ class V1::PatientsController < ApplicationController
   def find_patient
     patient = pundit_user.patients.find_by(id: params[:id])
     return patient if patient
+
     find_error(patient)
     nil
   end
-  
+
   def update_params
     params.require(:patient).permit(
       :given_name,

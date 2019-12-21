@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Patient < ApplicationRecord
   belongs_to :registrant, class_name: 'User'
   has_one_attached :profile_pic
