@@ -30,9 +30,31 @@ class V1::VitalsController < ApplicationController
     end
   end
 
-  def update; end
+  def update
+    patient = find_patient
+    return unless patient
 
-  def destroy; end
+    vital = find_vital(patient)
+    authorize vital
+    if vital.update(vital_params)
+      render json: { vital: vital.attributes }, status: :accepted
+    else
+      process_error(vital, 'Cannot update patient')
+    end
+  end
+
+  def destroy
+    patient = find_patient
+    return unless patient
+    vital = find_vital(patient)
+
+    authorize vital
+    if vital&.destroy
+      render json: { status: :accepted, message: 'Deleted the vital', vital: vital.attributes }
+    else
+      process_error(vital, 'Cannot delete vital')
+    end
+  end
 
   private
 
