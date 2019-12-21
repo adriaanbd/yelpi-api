@@ -3,7 +3,11 @@
 class V1::VitalsController < ApplicationController
   before_action :pundit_user
 
-  def index; end
+  def index
+    patient = find_patient
+    vitals = patient.vitals
+    render :vitals, locals: { vitals: vitals }, status: 200
+  end
 
   def show
     patient = find_patient
