@@ -5,7 +5,13 @@ class V1::VitalsController < ApplicationController
 
   def index; end
 
-  def show; end
+  def show
+    patient = find_patient
+    return unless patient
+    vital = find_vital(patient)
+    authorize vital
+    render :vital, locals: { vital: vital }, status: 200
+  end
 
   def create
     patient = find_patient
@@ -45,6 +51,14 @@ class V1::VitalsController < ApplicationController
     return patient if patient
 
     find_error('patient')
+    nil
+  end
+
+  def find_vital(patient)
+    vital = patient.vitals.find_by(id: params[:id])
+    return vital if vital
+
+    find_error('vital')
     nil
   end
 end
