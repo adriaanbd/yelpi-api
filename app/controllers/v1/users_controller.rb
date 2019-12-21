@@ -5,16 +5,16 @@ class V1::UsersController < ApplicationController
     user = find_user
     return unless user
 
-    render json: {user: user.attributes}
+    render :user, locals: { user: user }, status: 200
   end
   
   def create
     user = User.new(user_params)
     if user.save
-      token = generate_token(user.id)
-      render json: {user: user.attributes, token: token }, status: 201
+      token = JsonWebToken.encode({ id: user.id })
+      render :create, locals: {user: user, token: token }, status: 201
     else
-      render json: { message: 'Cannot create user', errors: user.errors }, status: 422
+      process_error(user, 'Cannot create account')
     end
   end
 
@@ -24,9 +24,9 @@ class V1::UsersController < ApplicationController
 
     authorize user
     if user.update(user_params)
-      render json: {user: user.attributes, token: generate_token(user.id)}
+      render :user, locals {user: user }, status: 202
     else
-      render json: {error: "Cannot update account"}
+      process_error(user, 'Cannot update account')
     end
   end
 
@@ -35,8 +35,11 @@ class V1::UsersController < ApplicationController
     return unless user
 
     authorize user
-    user.destroy
-    action_success('Account deleted')
+    if user.destroy
+      action_success('Account deleted', 202)
+    else
+      process_error(user, 'Something went wrong')
+    end
   end
 
   private
@@ -48,7 +51,6 @@ class V1::UsersController < ApplicationController
       :password_confirmation,
       :given_name,
       :last_name,
-      :profile_pic
     )
   end
 
@@ -58,9 +60,5 @@ class V1::UsersController < ApplicationController
 
     render json: { error: "Cannot find user" }
     nil
-  end
-
-  def generate_token(id)
-    JsonWebToken.encode({id: id})
   end
 end
