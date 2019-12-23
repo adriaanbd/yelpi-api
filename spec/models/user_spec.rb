@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) { build(:user) }
   let(:saved_user) { create(:user) }
 
-  describe 'CRUD operations at unit level' do 
+  describe 'CRUD operations at unit level' do
     context 'happy path' do
-
       before do
         user.save!
       end
@@ -18,34 +19,33 @@ RSpec.describe User, type: :model do
 
     context 'validations' do
       it 'is not valid without name' do
-        user.given_name = nil;
+        user.given_name = nil
         expect(user).to_not be_valid
       end
 
       it 'is not valid without last_name' do
-        user.last_name = nil;
+        user.last_name = nil
         expect(user).to_not be_valid
       end
 
-      it 'is not valid without email' do 
-        user.email = nil;
+      it 'is not valid without email' do
+        user.email = nil
         expect(user).to_not be_valid
       end
 
-      it 'is not valid without password' do 
-        user.password = nil;
+      it 'is not valid without password' do
+        user.password = nil
         expect(user).to_not be_valid
       end
 
-      it 'is not valid without password' do 
-        user.password_confirmation = 'test';
+      it 'is not valid without password' do
+        user.password_confirmation = 'test'
         expect(user).to_not be_valid
       end
     end
 
     context 'update' do
-
-      before do 
+      before do
         saved_user.given_name = 'john'
         saved_user.last_name = 'doe'
         saved_user.email = 'johndoe@example.com'
@@ -68,7 +68,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'delete' do
-      it 'deletes a record' do 
+      it 'deletes a record' do
         saved_user.destroy
         expect { saved_user.reload }.to raise_error ActiveRecord::RecordNotFound
       end

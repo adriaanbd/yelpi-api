@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe V1::UsersController, :type => :request do
+RSpec.describe V1::UsersController, type: :request do
   let(:tommy) { create(:user, email: 'tom@gmail.com') }
   # To be transferred later on in the specs/support directory
   def user_params(attributes_hash)
@@ -9,7 +11,7 @@ RSpec.describe V1::UsersController, :type => :request do
 
   def create_user(attributes)
     post user_route,
-      params: user_params(attributes)
+         params: user_params(attributes)
   end
 
   def valid_user_attributes
@@ -41,7 +43,7 @@ RSpec.describe V1::UsersController, :type => :request do
           .to change(User, :count).by(1)
 
         expect(response).to have_http_status(201)
-        
+
         expect(json_response['token']).to eq(user_token)
       end
     end
@@ -49,7 +51,7 @@ RSpec.describe V1::UsersController, :type => :request do
     context 'invalid params' do
       context 'missing given_name' do
         it 'does not create user' do
-          expect { create_user(invalid_user_attributes)}
+          expect { create_user(invalid_user_attributes) }
             .to_not change(User, :count)
 
           expect(response).to have_http_status(422)
