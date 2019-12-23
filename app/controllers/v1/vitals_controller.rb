@@ -5,6 +5,8 @@ class V1::VitalsController < ApplicationController
 
   def index
     patient = find_patient
+    return unless patient
+
     vitals = patient.vitals
     render :vitals, locals: { vitals: vitals }, status: 200
   end
@@ -39,7 +41,7 @@ class V1::VitalsController < ApplicationController
     if vital.update(vital_params)
       render json: { vital: vital.attributes }, status: :accepted
     else
-      process_error(vital, 'Cannot update patient')
+      process_error(vital, 'Cannot update vital record')
     end
   end
 
