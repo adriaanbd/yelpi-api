@@ -7,4 +7,5 @@ class Patient < ApplicationRecord
   validates :given_name, :last_name, :birthdate, :gender, :relationship, presence: true
 
   has_many :vitals, foreign_key: :patient_id, dependent: :destroy
+  has_many :medications, foreign_key: :patient_id
 end
