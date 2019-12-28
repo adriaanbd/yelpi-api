@@ -2,7 +2,8 @@
 
 class PatientPolicy < ApplicationPolicy
   def show?
-    @user == @record.registrant
+    @user == @record.registrant ||
+    @record.observers.include?(@user)
   end
 
   def update?
