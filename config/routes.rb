@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :patients, except: [:new, :edit] do
       resources :vitals
       resources :medications
+      resources :observations, only: [:create]
     end
   end
 end
