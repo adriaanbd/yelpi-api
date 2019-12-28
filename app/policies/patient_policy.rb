@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UserPolicy < ApplicationPolicy
+class PatientPolicy < ApplicationPolicy
   def show?
     @user == @record.registrant
   end
