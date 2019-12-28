@@ -9,6 +9,7 @@ class V1::ObservationsController < ApplicationController
 
     observation = patient.observations.build(obs_params)
 
+    authorize observation
     if observation.save
       render :observation, locals: { observation: observation },
                            status: 201
