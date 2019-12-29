@@ -14,7 +14,7 @@ class ObservationPolicy < ApplicationPolicy
   end
 
   def destroy?
-    @user == @record.registrant
+    @user == @record.observer
   end
 
   class Scope < Scope
