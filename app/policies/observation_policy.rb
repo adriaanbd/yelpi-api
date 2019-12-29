@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 
-class PatientPolicy < ApplicationPolicy
+class ObservationPolicy < ApplicationPolicy
   def show?
-    @user == @record.registrant ||
-    @record.observers.include?(@user)
+    @user == @record.registrant
+  end
+
+  def create?
+    @user != @record.observer
   end
 
   def update?
@@ -11,7 +14,7 @@ class PatientPolicy < ApplicationPolicy
   end
 
   def destroy?
-    @user == @record.registrant
+    @user == @record.registrant || @user == @record.observer
   end
 
   class Scope < Scope

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_26_153600) do
+ActiveRecord::Schema.define(version: 2019_12_27_001057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -49,6 +49,16 @@ ActiveRecord::Schema.define(version: 2019_12_26_153600) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["patient_id"], name: "index_medications_on_patient_id"
+  end
+
+  create_table "observations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "observer_id", null: false
+    t.uuid "patient_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["observer_id", "patient_id"], name: "index_observations_on_observer_id_and_patient_id", unique: true
+    t.index ["observer_id"], name: "index_observations_on_observer_id"
+    t.index ["patient_id"], name: "index_observations_on_patient_id"
   end
 
   create_table "patients", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -94,6 +104,8 @@ ActiveRecord::Schema.define(version: 2019_12_26_153600) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "medications", "patients"
+  add_foreign_key "observations", "patients"
+  add_foreign_key "observations", "users", column: "observer_id"
   add_foreign_key "patients", "users", column: "registrant_id"
   add_foreign_key "vitals", "patients"
 end

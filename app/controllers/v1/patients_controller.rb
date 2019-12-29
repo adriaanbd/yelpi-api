@@ -61,7 +61,7 @@ class V1::PatientsController < ApplicationController
   end
 
   def find_patient
-    patient = pundit_user.patients.find_by(id: params[:id])
+    patient = Patient.find_by(id: params[:id])
     return patient if patient
 
     find_error(patient)
