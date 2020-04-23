@@ -99,7 +99,7 @@ There are no tests at the moment but it is something that'll eventually be added
 
 - GitHub: [@rvvergara](https://github.com/rvvergara)
 - Twitter: [@CoachRyanV](https://twitter.com/CoachRyanV)
-- LinkedIn: [adriaanbd](https://www.linkedin.com/in/rvvergara/)
+- LinkedIn: [rvvergara](https://www.linkedin.com/in/rvvergara/)
 
 ## Contributing
 
