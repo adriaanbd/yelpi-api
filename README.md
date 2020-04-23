@@ -65,9 +65,9 @@ Please note that, since it is on a free tier, requests could take a bit more tim
 |Update Medication|`v1/patients/:patient_id/medications/:id`|`PATCH`|patient_id. medication_id, `medication[key]=value`|registrant_id, token
 |Delete Medication|`v1/patients/:patient_id/medications/:id`|`DELETE`|patient_id. medication_id|registrant_id, token
 |Create Observer|`v1/patients/:patient>id/observations`|`POST`|patient_id|registrant_id, token
+|Delete Observer|`v1/patients/:patient_id/observations/:id`|`DELETE`|patient_id, observation_id|registrant_id, token
 |List Observed Patients|`v1/users/:user_id/observed_patients`|`GET`|user_id|token
 |Delete Observation|`v1/users/:user_id/observed_patients/:id`|`DELETE`|user_id, observation_id|token
-|Delete Observer|`v1/patients/:patient_id/observations/:id`|patient_id, observation_id|registrant_id, token
 
 ## Sample call
 
