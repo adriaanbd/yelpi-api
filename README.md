@@ -44,7 +44,7 @@ Please note that, since it is on a free tier, requests could take a bit more tim
 ## Endpoints
 
 |Purpose|Endpoint|Method|URL Params|Data Params
-|--|--|--|--|--|--
+|--|--|--|--|--
 |Create User|`/v1/users`|`POST`|email, given_name, last_name, password, password_confirmation
 |Login User|`/v1/sessions/`|`POST`|email, password
 |Show User|`/v1/users/:id`|`GET`|id|token
