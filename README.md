@@ -1,6 +1,23 @@
 # Yelpi API
 
-Yelpi API is the Rails API to a healthcare app wherein a caretaker can register patients they care for, along with their health data inputs, i.e. medication, blood pressure, mental state, physical state, and medical condition, among others.
+> A Rails API to a healthcare app wherein a caretaker can register patients they care for, along with their health data inputs, i.e. medication, blood pressure, mental state, physical state, and medical condition, among others, and share the patient profile with an observer.
+
+![Entity Relationship Diagram](/screenshots/erd.png?raw=true)
+
+## Built With
+
+- Rails 5
+- JSON views with JBuilder
+- Authentication with JWT
+- Authorization with Pundit
+- Database with PostgreSQL
+- Testing with RSpec
+
+## Live API
+
+The API has been deployed on a free tier of a Heroku instance and can be accessed by using the following link: https://shrouded-ridge-16947.herokuapp.com/.
+
+Please note that, since it is on a free tier, requests could take a bit more time longerthan usual.
 
 ## Getting started
 
@@ -27,7 +44,7 @@ Yelpi API is the Rails API to a healthcare app wherein a caretaker can register 
 ## Endpoints
 
 |Purpose|Endpoint|Method|URL Params|Data Params
-|--|--|--|--|--|
+|--|--|--|--|--|--
 |Create User|`/v1/users`|`POST`|email, given_name, last_name, password, password_confirmation
 |Login User|`/v1/sessions/`|`POST`|email, password
 |Show User|`/v1/users/:id`|`GET`|id|token
