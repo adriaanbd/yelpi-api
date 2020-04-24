@@ -123,7 +123,3 @@ There are no tests at the moment but it is something that'll eventually be added
 Contributions, issues and feature requests are welcome.
 
 Feel free to check the issues page [here](https://github.com/yelpi-api/readme-template/blob/master/issues)
-
-## License
-
-This project is MIT licensed.
