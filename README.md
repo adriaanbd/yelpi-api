@@ -15,7 +15,7 @@
 
 ## Live API
 
-The API has been deployed on a free tier of a Heroku instance and can be accessed by using the following link: https://shrouded-ridge-16947.herokuapp.com/.
+The API has been deployed on Heroku and can be accessed by using the following link, [here](https://mighty-ocean-68056.herokuapp.com/).
 
 Please note that, since it is on a free tier, requests could take a bit more time longerthan usual.
 
