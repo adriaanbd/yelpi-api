@@ -70,8 +70,8 @@ class V1::PatientsController < ApplicationController
 
   def update_params
     params.require(:patient).permit(
-      :given_name,
-      :last_name,
+      :nome,
+      :sobre_nome,
       :birthdate,
       :gender,
       :profile_pic,
