@@ -10,7 +10,7 @@
 #  nome          :string           not null
 #  profile_pic   :string           default(""), not null
 #  relationship  :string           not null
-#  sobre_nome    :string           not null
+#  sobrenome     :string           not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  registrant_id :uuid             not null
@@ -28,7 +28,7 @@ FactoryBot.define do
   factory :patient do
     registrant_id { "" }
     nome { "MyString" }
-    sobre_nome { "MyString" }
+    sobrenome { "MyString" }
     birthdate { "2019-12-14" }
     gender { "MyString" }
     relationship { "MyString" }

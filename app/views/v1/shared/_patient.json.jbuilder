@@ -3,7 +3,7 @@
 json.id patient.id
 json.registrant_id patient.registrant_id
 json.nome patient.nome
-json.sobre_nome patient.sobre_nome
+json.sobrenome patient.sobrenome
 json.birthdate patient.birthdate
 json.gender patient.gender
 json.relationship patient.relationship

@@ -10,7 +10,7 @@
 #  nome          :string           not null
 #  profile_pic   :string           default(""), not null
 #  relationship  :string           not null
-#  sobre_nome    :string           not null
+#  sobrenome     :string           not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  registrant_id :uuid             not null
@@ -28,7 +28,7 @@ class Patient < ApplicationRecord
   belongs_to :registrant, class_name: "User"
   has_one_attached :profile_pic
 
-  validates :nome, :sobre_nome, :birthdate, :gender, :relationship, presence: true
+  validates :nome, :sobrenome, :birthdate, :gender, :relationship, presence: true
 
   has_many :vitals, foreign_key: :patient_id, dependent: :destroy
   has_many :medications, foreign_key: :patient_id,

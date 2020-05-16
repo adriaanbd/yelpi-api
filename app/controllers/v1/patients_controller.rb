@@ -52,7 +52,7 @@ class V1::PatientsController < ApplicationController
   def patient_params
     params.require(:patient).permit(
       :nome,
-      :sobre_nome,
+      :sobrenome,
       :birthdate,
       :gender,
       :profile_pic,
@@ -71,7 +71,7 @@ class V1::PatientsController < ApplicationController
   def update_params
     params.require(:patient).permit(
       :nome,
-      :sobre_nome,
+      :sobrenome,
       :birthdate,
       :gender,
       :profile_pic,
