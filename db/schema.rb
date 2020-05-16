@@ -63,8 +63,8 @@ ActiveRecord::Schema.define(version: 2019_12_27_001057) do
 
   create_table "patients", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "registrant_id", null: false
-    t.string "given_name", null: false
-    t.string "last_name", null: false
+    t.string "nome", null: false
+    t.string "sobre_nome", null: false
     t.date "birthdate", null: false
     t.string "gender", null: false
     t.string "profile_pic", default: "", null: false

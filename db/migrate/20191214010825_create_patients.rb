@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class CreatePatients < ActiveRecord::Migration[5.2]
   def change
     create_table :patients, id: :uuid do |t|
       t.uuid :registrant_id, null: false
-      t.string :given_name, null: false
-      t.string :last_name, null: false
+      t.string :nome, null: false
+      t.string :sobre_nome, null: false
       t.date :birthdate, null: false
       t.string :gender, null: false
-      t.string :profile_pic, null: false, default: ''
+      t.string :profile_pic, null: false, default: ""
       t.string :relationship, null: false
 
       t.timestamps

@@ -22,7 +22,7 @@ class V1::PatientsController < ApplicationController
     if patient.save
       render :patient, locals: { patient: patient }, status: :created
     else
-      process_error(patient, 'Cannot create patient')
+      process_error(patient, "Cannot create patient")
     end
   end
 
@@ -34,16 +34,16 @@ class V1::PatientsController < ApplicationController
     if patient.update(update_params)
       render json: { patient: patient.attributes }, status: :accepted
     else
-      process_error(patient, 'Cannot update patient')
+      process_error(patient, "Cannot update patient")
     end
   end
 
   def destroy
     patient = find_patient
     if patient&.destroy
-      render json: { status: :accepted, message: 'Deleted the patient', patient: patient.attributes }
+      render json: { status: :accepted, message: "Deleted the patient", patient: patient.attributes }
     else
-      process_error(patient, 'Cannot delete patient')
+      process_error(patient, "Cannot delete patient")
     end
   end
 
@@ -51,8 +51,8 @@ class V1::PatientsController < ApplicationController
 
   def patient_params
     params.require(:patient).permit(
-      :given_name,
-      :last_name,
+      :nome,
+      :sobre_nome,
       :birthdate,
       :gender,
       :profile_pic,
