@@ -123,3 +123,18 @@ There are no tests at the moment but it is something that'll eventually be added
 Contributions, issues and feature requests are welcome.
 
 Feel free to check the issues page [here](https://github.com/adriaanbd/yelpi-api/issues).
+
+Guidelines:
+
+Suggest changes by making a pull request from your repository towards this one. 
+
+1. Fork the project into your repository
+2. Clone your repository to have it locally
+3. Add this repository as remote: `$ git remote add upstream https://github.com/adriaanbd/yelpi-android.git`
+4. Check that you've added it correctly: `$ git remote -v`
+5. Always sync your local repository with this one: `$ git fetch upstream` 
+6. Merge the changes from upstream into your local master branch `$ git merge upstream/dev`
+7. Push the changes from previous step `$ git push`
+
+The development branch is the default branch and has the latest version of the project in development. 
+The master branch will only be used for production releases.
